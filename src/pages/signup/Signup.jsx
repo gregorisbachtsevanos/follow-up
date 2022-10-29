@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { projectAuth } from "../../firebase/config";
+import { useSignup } from "../../hooks/useSignup";
 
 // styles
 import "./Signup.css";
@@ -9,10 +10,12 @@ const Signup = () => {
 	const [password, setPassword] = useState("");
 	const [username, setUsername] = useState("");
 	const [avatar, setAvatar] = useState(null);
+	const { signup } = useSignup();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(email, password, username);
+		signup(email, password, username);
 	};
 
 	return (
