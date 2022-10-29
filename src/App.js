@@ -13,7 +13,7 @@ import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar';
 
 function App() {
-	const user = true
+	const user = false
 	return (
 		<div className="App">
 			<BrowserRouter>
