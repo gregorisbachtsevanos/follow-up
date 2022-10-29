@@ -18,20 +18,9 @@ const Navbar = ({ user }) => {
 						</li>
 					</>
 				) : (
-					<>
-						<li>
-							<Link to="/">Home</Link>
-						</li>
-						<li>
-							<Link to="/name">Project</Link>
-						</li>
-						<li>
-							<Link to="/create">Create</Link>
-						</li>
-						<li>
-							<button className="btn">Logout</button>
-						</li>
-					</>
+					<li>
+						<button className="btn">Logout</button>
+					</li>
 				)}
 			</ul>
 		</div>

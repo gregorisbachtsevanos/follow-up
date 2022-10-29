@@ -10,12 +10,14 @@ import Project from './pages/project/Project';
 import { PrivateRouter } from './utils/PrivateRouter';
 import { PublicRouter } from './utils/PublicRouter';
 import Navbar from './components/Navbar/Navbar'
+import Sidebar from './components/Sidebar/Sidebar';
 
 function App() {
 	const user = true
 	return (
 		<div className="App">
 			<BrowserRouter>
+				{user && <Sidebar />}
 				<div className="container">
 					<Navbar user={user} />
 					<Routes>
