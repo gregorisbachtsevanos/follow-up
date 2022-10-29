@@ -10,12 +10,33 @@ const Signup = () => {
 	const [password, setPassword] = useState("");
 	const [username, setUsername] = useState("");
 	const [avatar, setAvatar] = useState(null);
+	const [avatarError, setAvatarError] = useState(null);
 	const { signup } = useSignup();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(email, password, username);
-		signup(email, password, username);
+		console.log(email, password, username, avatar);
+		// signup(email, password, username);
+	};
+
+	const handleAvatarChange = (e) => {
+		setAvatar(null);
+		let selected = e.target.files[0];
+		console.log(selected);
+		if (!selected) {
+			setAvatarError("Avatar cannot be empty");
+			return;
+		}
+		if (!selected.type.includes("image/")) {
+			setAvatarError("Type must be an image");
+			return;
+		}
+		// if (selected.size > 100000) {
+		// 	setAvatarError("Image must be smaller than 100kb");
+		// 	return;
+		// }
+		setAvatarError(null);
+		setAvatar(selected);
 	};
 
 	return (
@@ -52,11 +73,12 @@ const Signup = () => {
 				<span>Avatar</span>
 				<input
 					type="file"
-					onChange={(e) => setAvatar(e.target.value)}
-					value={avatar}
+					onChange={handleAvatarChange}
+					// value={avatar}
 					// required
 				/>
 			</label>
+			{avatarError && <p className="error">{avatarError}</p>}
 			<button className="btn">Sign up</button>
 		</form>
 	);
