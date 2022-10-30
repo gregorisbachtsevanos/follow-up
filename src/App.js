@@ -11,12 +11,13 @@ import { PrivateRouter } from './utils/PrivateRouter';
 import { PublicRouter } from './utils/PublicRouter';
 import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar';
+import { useAuthContext } from './hooks/useAuthContext'
 
 function App() {
-	const user = false
+	const { authIsReady, user } = useAuthContext()
 	return (
 		<div className="App">
-			<BrowserRouter>
+			{authIsReady && <BrowserRouter>
 				{user && <Sidebar />}
 				<div className="container">
 					<Navbar user={user} />
@@ -32,7 +33,7 @@ function App() {
 						</Route>
 					</Routes>
 				</div>
-			</BrowserRouter>
+			</BrowserRouter>}
 		</div >
 	);
 }
