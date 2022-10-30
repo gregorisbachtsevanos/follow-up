@@ -34,7 +34,7 @@ const Create = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (!category.value) return setFormError("Category cannot be empty");
+		if (!category) return setFormError("Category cannot be empty");
 
 		if (assignUsers.length === 0)
 			return setFormError("You must assign at least one user");
