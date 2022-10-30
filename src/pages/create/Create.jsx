@@ -17,6 +17,7 @@ const Create = () => {
 	const [dueDate, setDueDate] = useState("");
 	const [category, setCategory] = useState("");
 	const [assignUsers, setAssignUsers] = useState([]);
+	const [formError, setFormError] = useState(null);
 
 	const [selectUsers, setSelectUsers] = useState([]);
 	const { users } = useCollection("users");
@@ -32,6 +33,14 @@ const Create = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		if (!category.value) return setFormError("Category cannot be empty");
+
+		if (assignUsers.length === 0)
+			return setFormError("You must assign at least one user");
+
+		setFormError(null);
+
 		console.log(name, details, dueDate, category.value, assignUsers);
 	};
 
@@ -82,6 +91,7 @@ const Create = () => {
 					/>
 				</label>
 				<button className="btn">Add Project</button>
+				{formError && <div className="error">{formError}</div>}
 			</form>
 		</div>
 	);
