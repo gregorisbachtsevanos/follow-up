@@ -11,12 +11,12 @@ const Signup = () => {
 	const [username, setUsername] = useState("");
 	const [avatar, setAvatar] = useState(null);
 	const [avatarError, setAvatarError] = useState(null);
-	const { signup } = useSignup();
+	const { signup, isPending, error } = useSignup();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(email, password, username, avatar);
-		// signup(email, password, username);
+		// return console.log(email, password, username, avatar);
+		signup(email, password, username, avatar);
 	};
 
 	const handleAvatarChange = (e) => {
@@ -78,8 +78,15 @@ const Signup = () => {
 					// required
 				/>
 			</label>
-			{avatarError && <p className="error">{avatarError}</p>}
-			<button className="btn">Sign up</button>
+			{avatarError && <div className="error">{avatarError}</div>}
+			{isPending ? (
+				<button className="btn" disabled>
+					Loading
+				</button>
+			) : (
+				<button className="btn">Sign up</button>
+			)}
+			{error && <div className="error">{error}</div>}
 		</form>
 	);
 };
