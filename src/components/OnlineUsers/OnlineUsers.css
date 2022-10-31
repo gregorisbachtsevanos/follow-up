@@ -30,9 +30,9 @@
   transition: 1s;
   position: absolute;
   display: inline-block;
-  width: 13px;
-  height: 13px;
-  background: #73dc1ef4;
+  width: 10px;
+  height: 10px;
+  background: #74b83ede;
   border-radius: 50%;
   margin-top: -25px;
 }

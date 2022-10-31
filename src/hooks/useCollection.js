@@ -4,7 +4,7 @@ import { projectFirestore } from "../firebase/config";
 export const useCollection = (collection) => {
     const [isPending, setIsPending] = useState(false)
     const [error, setError] = useState(null);
-    const [users, setUsers] = useState([]);
+    const [documents, setDocuments] = useState([]);
 
     useEffect(() => {
 
@@ -19,7 +19,7 @@ export const useCollection = (collection) => {
             snapshot.docs.forEach((doc) => {
                 result.push({ id: doc.id, ...doc.data() })
             })
-            setUsers(result)
+            setDocuments(result)
             setIsPending(false)
             setError(null);
 
@@ -32,6 +32,7 @@ export const useCollection = (collection) => {
         );
         return () => unsub()
     }, [collection])
+    console.log(documents)
 
-    return { users, error, isPending }
+    return { documents, error, isPending }
 }

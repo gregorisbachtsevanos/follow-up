@@ -24,23 +24,23 @@ const Create = () => {
 	const [formError, setFormError] = useState(null); // set form validation error
 
 	const [selectUsers, setSelectUsers] = useState([]); // set users array for the options (dropdown)
-	const { users } = useCollection('users'); // get users collection (all users)
+	const { documents } = useCollection('users'); // get users collection (all users)
 	const { user } = useAuthContext(); // get auth user
-	const navigate = useNavigate()
+	const navigate = useNavigate(); // redirect if the task was insert successfully
 
-	const { addDocument, res } = useFirestore('tasks')
+	const { addDocument, res } = useFirestore('tasks'); // get the addDocument function from useFirestore hook
 
 	useEffect(() => {
-		if (users) {
-			const options = users.map((user) => {
+		if (documents) {
+			const options = documents.map((user) => {
 				return { value: user, label: user.displayName };
 			});
-			console.log(users)
+			
 			setSelectUsers(options);
 		}
-	}, [users]);
+	}, [documents]);
 
-	const handleSubmit = async(e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!category) return setFormError('Category cannot be empty');
@@ -75,8 +75,11 @@ const Create = () => {
 		};
 
 		await addDocument(project);
-		if(!res.error){
-			navigate('/')
+		if (!res.error) {
+			navigate('/');
+		} else {
+			console.log(res.error)
+			setFormError(res.error)
 		}
 	};
 
