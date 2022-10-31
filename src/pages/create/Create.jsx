@@ -1,32 +1,36 @@
-import React, { useEffect, useState } from "react";
-import Select from "react-select";
+import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
+import { timestamp } from '../../firebase/config';
 
-import { useCollection } from "../../hooks/useCollection";
-import "./Create.css";
+import { useCollection } from '../../hooks/useCollection';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import './Create.css';
 
 const categories = [
-	{ value: "development", label: "Development" },
-	{ value: "design", label: "Design" },
-	{ value: "sales", label: "Sales" },
-	{ value: "marketing", label: "Marketing" },
+	{ value: 'development', label: 'Development' },
+	{ value: 'design', label: 'Design' },
+	{ value: 'sales', label: 'Sales' },
+	{ value: 'marketing', label: 'Marketing' },
 ];
 
 const Create = () => {
-	const [name, setName] = useState("");
-	const [details, setDetails] = useState("");
-	const [dueDate, setDueDate] = useState("");
-	const [category, setCategory] = useState("");
-	const [assignUsers, setAssignUsers] = useState([]);
-	const [formError, setFormError] = useState(null);
+	const [name, setName] = useState(''); // set project name
+	const [details, setDetails] = useState(''); // set project details
+	const [dueDate, setDueDate] = useState(''); // set project delivery date
+	const [category, setCategory] = useState(''); // set project category
+	const [assignUsers, setAssignUsers] = useState([]); // set assign users to project
+	const [formError, setFormError] = useState(null); // set form validation error
 
-	const [selectUsers, setSelectUsers] = useState([]);
-	const { users } = useCollection("users");
+	const [selectUsers, setSelectUsers] = useState([]); // set users array for the options (dropdown)
+	const { users } = useCollection('users'); // get users collection (all users)
+	const { user } = useAuthContext(); // get auth user
 
 	useEffect(() => {
 		if (users) {
 			const options = users.map((user) => {
 				return { value: user, label: user.displayName };
 			});
+			console.log(users)
 			setSelectUsers(options);
 		}
 	}, [users]);
@@ -34,14 +38,37 @@ const Create = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (!category) return setFormError("Category cannot be empty");
+		if (!category) return setFormError('Category cannot be empty');
 
 		if (assignUsers.length === 0)
-			return setFormError("You must assign at least one user");
+			return setFormError('You must assign at least one user');
 
 		setFormError(null);
 
-		console.log(name, details, dueDate, category.value, assignUsers);
+		const createdBy = {
+			displayName: user.displayName,
+			photoUR: user.photoURL,
+			id: user.uid,
+		};
+
+		const assignedUsersList = assignUsers.map((u) => {
+			return {
+				displayName: u.value.displayName,
+				photoUR: u.value.photoURL,
+				id: u.value.id,
+			};
+		});
+
+		const project = {
+			name,
+			details,
+			category: category.value,
+			dueDate: timestamp.fromDate(new Date(dueDate)),
+			comments: [],
+			createdBy,
+			assignedUsersList,
+		};
+		console.log(project);
 	};
 
 	return (
