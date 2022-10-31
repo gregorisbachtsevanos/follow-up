@@ -5,6 +5,8 @@ import { timestamp } from '../../firebase/config';
 import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import './Create.css';
+import { useFirestore } from '../../hooks/useFirestore';
+import { useNavigate } from 'react-router-dom';
 
 const categories = [
 	{ value: 'development', label: 'Development' },
@@ -24,6 +26,9 @@ const Create = () => {
 	const [selectUsers, setSelectUsers] = useState([]); // set users array for the options (dropdown)
 	const { users } = useCollection('users'); // get users collection (all users)
 	const { user } = useAuthContext(); // get auth user
+	const navigate = useNavigate()
+
+	const { addDocument, res } = useFirestore('tasks')
 
 	useEffect(() => {
 		if (users) {
@@ -35,7 +40,7 @@ const Create = () => {
 		}
 	}, [users]);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async(e) => {
 		e.preventDefault();
 
 		if (!category) return setFormError('Category cannot be empty');
@@ -63,12 +68,16 @@ const Create = () => {
 			name,
 			details,
 			category: category.value,
-			dueDate: timestamp.fromDate(new Date(dueDate)),
+			deadLine: timestamp.fromDate(new Date(dueDate)),
 			comments: [],
 			createdBy,
 			assignedUsersList,
 		};
-		console.log(project);
+
+		await addDocument(project);
+		if(!res.error){
+			navigate('/')
+		}
 	};
 
 	return (
