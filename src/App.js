@@ -26,7 +26,7 @@ function App() {
 						<Route element={<PrivateRouter user={user} />}>
 							<Route path='/' element={<Dashboard />} />
 							<Route path='/create' element={<Create />} />
-							<Route path='/:id' element={<Project />} />
+							<Route path='/project/:id' element={<Project />} />
 						</Route>
 						<Route element={<PublicRouter user={user} />}>
 							<Route path='/login' element={<Login />} />

@@ -52,14 +52,14 @@ const Create = () => {
 
 		const createdBy = {
 			displayName: user.displayName,
-			photoUR: user.photoURL,
+			photoURL: user.photoURL,
 			id: user.uid,
 		};
 
 		const assignedUsersList = assignUsers.map((u) => {
 			return {
 				displayName: u.value.displayName,
-				photoUR: u.value.photoURL,
+				photoURL: u.value.photoURL,
 				id: u.value.id,
 			};
 		});
@@ -68,7 +68,7 @@ const Create = () => {
 			name,
 			details,
 			category: category.value,
-			deadLine: timestamp.fromDate(new Date(dueDate)),
+			deadline: timestamp.fromDate(new Date(dueDate)),
 			comments: [],
 			createdBy,
 			assignedUsersList,

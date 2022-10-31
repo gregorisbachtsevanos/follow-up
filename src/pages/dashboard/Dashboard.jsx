@@ -1,18 +1,15 @@
+import ProjectList from '../../components/ProjectList/ProjectList';
 import { useCollection } from '../../hooks/useCollection';
 
 import './Dashboard.css';
 
 const Dashboard = () => {
-	const { documents } = useCollection('tasks');
+	const { documents, error } = useCollection('tasks');
 	return (
 		<div>
-			{documents &&
-				documents.map((task) => (
-					<div>
-						<h1>{task.name}</h1>
-						<p>{task.details}</p>
-					</div>
-				))}
+			<h2 className="page-title">Dashboard</h2>
+			{error && <div className="error">{error}</div>}
+			{documents && <ProjectList projects={documents} />}
 		</div>
 	);
 };
