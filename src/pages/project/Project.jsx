@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useDocument } from '../../hooks/useDocument';
 import './Project.css';
+import ProjectSummary from './ProjectSummary';
 
 const Project = () => {
 	const { id } = useParams();
@@ -12,7 +13,7 @@ const Project = () => {
 			{isPending && <p className="loading">loading...</p>}
 			{document && (
 				<div className="project-details">
-					<h1>{document.name}</h1>
+					<ProjectSummary project={document} />
 				</div>
 			)}
 		</div>
