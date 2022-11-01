@@ -26,17 +26,18 @@
    color: var(--text-color);
    font-size: 0.9em;
  }
- .project-summary .assigned-users {
-   display: flex;
+ .project-summary .assigned-to {
    margin-top: 20px;
  }
- .project-summary .assigned-users .avatar {
+ .project-summary .assigned-to ul{
+   display: flex;
+ }
+ .project-summary .assigned-to .avatar {
    margin-right: 10px;
  }
  .project-summary + .btn {
    margin-top: 20px;
  }
- 
  /* project comments */
  .project-comments label {
    margin-bottom: 0px;
