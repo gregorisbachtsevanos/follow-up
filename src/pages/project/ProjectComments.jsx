@@ -28,16 +28,13 @@ export const ProjectComments = ({ project }) => {
 		}
 	};
 
-	const deleteComment = async (id, e) => {
+	const deleteComment = async (commentId, e) => {
 		e.preventDefault();
-		// console.log(project.comments);
 
-		const newCommentList = project.comments.filter((comment) => {
-			return comment.id !== id;
-		});
-		// console.log(newCommentList);
-		await updateDocument(id, {
-			comments: project.comments.filter((comment) => comment.id !== id),
+		await updateDocument(project.id, {
+			comments: project.comments.filter(
+				(comment) => comment.id !== commentId
+			),
 		});
 	};
 
@@ -48,13 +45,6 @@ export const ProjectComments = ({ project }) => {
 				{project.comments.length > 0 &&
 					project.comments.map((comment) => (
 						<li key={comment.id}>
-							<button
-								className="btn"
-								onClick={(e) => deleteComment(comment.id, e)}
-							>
-								DELETE
-							</button>
-
 							<div className="comment-author">
 								<Avatar src={comment.photoURL} />
 								<p>{comment.displayName}</p>
@@ -65,6 +55,12 @@ export const ProjectComments = ({ project }) => {
 							<div className="comment-content">
 								<p>{comment.content}</p>
 							</div>
+							<button
+								className="btn"
+								onClick={(e) => deleteComment(comment.id, e)}
+							>
+								DELETE
+							</button>
 						</li>
 					))}
 			</ul>

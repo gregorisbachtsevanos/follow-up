@@ -32,7 +32,7 @@ export const useCollection = (collection) => {
         );
         return () => unsub()
     }, [collection])
-    console.log(documents)
+    // console.log(documents)
 
     return { documents, error, isPending }
 }
