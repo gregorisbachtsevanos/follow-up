@@ -4,7 +4,7 @@ import { useCollection } from '../../hooks/useCollection';
 import './Dashboard.css';
 
 const Dashboard = () => {
-	const { documents, error } = useCollection('tasks');
+	const { documents, error } = useCollection('projects');
 	return (
 		<div>
 			<h2 className="page-title">Dashboard</h2>

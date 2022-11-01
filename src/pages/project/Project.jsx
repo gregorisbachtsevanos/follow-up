@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useDocument } from '../../hooks/useDocument';
 import './Project.css';
+import { ProjectComments } from './ProjectComments';
 import ProjectSummary from './ProjectSummary';
 
 const Project = () => {
 	const { id } = useParams();
-	const { document, isPending, error } = useDocument('tasks', id);
+	const { document, isPending, error } = useDocument('projects', id);
 
 	return (
 		<div>
@@ -14,6 +15,7 @@ const Project = () => {
 			{document && (
 				<div className="project-details">
 					<ProjectSummary project={document} />
+					<ProjectComments project={document} />
 				</div>
 			)}
 		</div>

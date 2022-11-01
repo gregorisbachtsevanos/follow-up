@@ -31,6 +31,20 @@ const firestorResucer = (state, action) => {
 				isPending: false,
 				document: action.payload,
 			};
+		case 'UPDATE_DOCUMENT':
+			return {
+				success: true,
+				error: null,
+				isPending: false,
+				document: action.payload,
+			};
+		case 'UPDATE_DOCUMENT':
+			return {
+				success: true,
+				error: null,
+				isPending: false,
+				document: null
+			};
 		default:
 			return state;
 	}
@@ -49,9 +63,32 @@ export const useFirestore = (collection) => {
 			const addedDocument = await ref.add({ ...doc, createdAt });
 			dispatch({ type: 'ADD_DOCUMENT', payload: addedDocument });
 		} catch (error) {
-			dispatch({ type: 'ERROR' });
+			dispatch({ type: 'ERROR', payload: error.message });
 		}
 	};
 
-	return { addDocument, res };
+	const updateDocument = async (id, updates) => {
+		dispatch({ type: 'IS_PENDING' });
+		// return console.log(updates)
+		const updatedDocument = await ref.doc(id).update({...updates});
+		try {
+			dispatch({ type: 'UPDATE_DOCUMENT', payload: updatedDocument });
+		} catch (error) {
+			console.log(error.message)
+			dispatch({ type: 'ERROR', payload: error.message });
+		}
+	};
+
+	const deleteDocument = async (id) => {
+		dispatch({ type: 'IS_PENDING' });
+		try {
+			await ref.doc(id).delete();
+			console.log(id)
+			dispatch({ type: 'DELETE_DOCUMENT' });
+		} catch (error) {
+			dispatch({ type: 'ERROR', payload: error.message });
+		}
+	};
+
+	return { addDocument, updateDocument, deleteDocument, res };
 };

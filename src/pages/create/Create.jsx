@@ -28,7 +28,7 @@ const Create = () => {
 	const { user } = useAuthContext(); // get auth user
 	const navigate = useNavigate(); // redirect if the task was insert successfully
 
-	const { addDocument, res } = useFirestore('tasks'); // get the addDocument function from useFirestore hook
+	const { addDocument, res } = useFirestore('projects'); // get the addDocument function from useFirestore hook
 
 	useEffect(() => {
 		if (documents) {
