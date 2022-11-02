@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import { timestamp } from '../../firebase/config';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { useFirestore } from '../../hooks/useFirestore';
-import { Avatar } from '../../components/Avatar/Avatar';
+import React, { useState } from "react";
+import { timestamp } from "../../firebase/config";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useFirestore } from "../../hooks/useFirestore";
+import { Avatar } from "../../components/Avatar/Avatar";
 
 export const ProjectComments = ({ project }) => {
 	const { user } = useAuthContext();
-	const [newComment, setNewComment] = useState('');
-	const { updateDocument, res } = useFirestore('projects');
+	const [newComment, setNewComment] = useState("");
+	const { updateDocument, res } = useFirestore("projects");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const commentToAdd = {
 			displayName: user.displayName,
+			userId: user.uid,
 			photoURL: user.photoURL,
 			content: newComment,
 			createdAt: timestamp.fromDate(new Date()),
@@ -24,13 +25,12 @@ export const ProjectComments = ({ project }) => {
 		});
 
 		if (!res.error) {
-			setNewComment('');
+			setNewComment("");
 		}
 	};
 
 	const deleteComment = async (commentId, e) => {
 		e.preventDefault();
-
 		await updateDocument(project.id, {
 			comments: project.comments.filter(
 				(comment) => comment.id !== commentId
@@ -45,9 +45,24 @@ export const ProjectComments = ({ project }) => {
 				{project.comments.length > 0 &&
 					project.comments.map((comment) => (
 						<li key={comment.id}>
-							<div className="comment-author">
-								<Avatar src={comment.photoURL} />
-								<p>{comment.displayName}</p>
+							<div className="comment-header">
+								<div className="comment-author">
+									<Avatar src={comment.photoURL} />
+									<p>{comment.displayName}</p>
+								</div>
+								{(user.uid === comment.userId ||
+									user.uid === project.createdBy.id) && (
+									<div className="comment-delete-icon">
+										<span
+											class="material-symbols-outlined"
+											onClick={(e) =>
+												deleteComment(comment.id, e)
+											}
+										>
+											delete
+										</span>
+									</div>
+								)}
 							</div>
 							<div className="comment-date">
 								<p>date here</p>
@@ -55,12 +70,6 @@ export const ProjectComments = ({ project }) => {
 							<div className="comment-content">
 								<p>{comment.content}</p>
 							</div>
-							<button
-								className="btn"
-								onClick={(e) => deleteComment(comment.id, e)}
-							>
-								DELETE
-							</button>
 						</li>
 					))}
 			</ul>

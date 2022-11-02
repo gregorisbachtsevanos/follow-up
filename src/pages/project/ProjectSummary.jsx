@@ -1,17 +1,17 @@
-import { Avatar } from '../../components/Avatar/Avatar';
-import { useFirestore } from '../../hooks/useFirestore';
-import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../hooks/useAuthContext';
+import { Avatar } from "../../components/Avatar/Avatar";
+import { useFirestore } from "../../hooks/useFirestore";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const ProjectSummary = ({ project }) => {
-	const { deleteDocument, res } = useFirestore('projects');
+	const { deleteDocument, res } = useFirestore("projects");
 	const { user } = useAuthContext();
 
 	const navigate = useNavigate();
 
 	const deleteProject = () => {
 		deleteDocument(project.id);
-		navigate('/');
+		navigate("/");
 	};
 
 	return (
@@ -23,7 +23,7 @@ const ProjectSummary = ({ project }) => {
 				</p>
 				<p className="details">{project.details}</p>
 				<h4>Project is assigned to:</h4>
-				<div className="assigned-to">
+				<div className="assigned-users">
 					<ul>
 						{project.assignedUsersList.map((user) => (
 							<li key={user.photoURL}>
