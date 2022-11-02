@@ -3,6 +3,7 @@ import "./Sidebar.css";
 import { NavLink } from "react-router-dom";
 import { Avatar } from "../Avatar/Avatar";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { Icon } from "../Icon/Icon";
 
 const Sidebar = () => {
 	const { user } = useAuthContext();
@@ -18,17 +19,16 @@ const Sidebar = () => {
 					<ul>
 						<li>
 							<NavLink end to="/">
-								<span class="material-symbols-outlined">
-									space_dashboard
-								</span>
+								<Icon attr="space_dashboard" />
 								<span>Dashboard</span>
 							</NavLink>
 						</li>
 						<li>
 							<NavLink to="/create">
-								<span class="material-symbols-outlined">
+								{/* <span className="material-symbols-outlined">
 									add
-								</span>
+								</span> */}
+								<Icon attr="add" />
 								<span>New Project</span>
 							</NavLink>
 						</li>

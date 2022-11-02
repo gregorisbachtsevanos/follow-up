@@ -1,15 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { projectFirestore } from "../firebase/config";
 
-export const useCollection = (collection) => {
+export const useCollection = (collection, _orderBy,) => {
     const [isPending, setIsPending] = useState(false)
     const [error, setError] = useState(null);
     const [documents, setDocuments] = useState([]);
+
+    const orderBy = useRef(_orderBy).current
 
     useEffect(() => {
 
         setIsPending(true)
         let ref = projectFirestore.collection(collection)
+        if (orderBy) ref = ref.orderBy(...orderBy)
+
         const unsub = ref.onSnapshot(snapshot => {
             // if (snapshot.empty) {
             //     setError('No Users have ')
@@ -31,7 +35,7 @@ export const useCollection = (collection) => {
             }
         );
         return () => unsub()
-    }, [collection])
+    }, [collection, orderBy])
     // console.log(documents)
 
     return { documents, error, isPending }

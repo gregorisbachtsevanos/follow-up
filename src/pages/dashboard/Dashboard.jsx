@@ -1,10 +1,13 @@
-import ProjectList from '../../components/ProjectList/ProjectList';
-import { useCollection } from '../../hooks/useCollection';
+import ProjectList from "../../components/ProjectList/ProjectList";
+import { useCollection } from "../../hooks/useCollection";
 
-import './Dashboard.css';
+import "./Dashboard.css";
 
 const Dashboard = () => {
-	const { documents, error } = useCollection('projects');
+	const { documents, error } = useCollection("projects", [
+		"createdAt",
+		"desc",
+	]);
 	return (
 		<div>
 			<h2 className="page-title">Dashboard</h2>

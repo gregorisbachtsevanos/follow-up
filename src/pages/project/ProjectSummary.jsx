@@ -2,6 +2,7 @@ import { Avatar } from "../../components/Avatar/Avatar";
 import { useFirestore } from "../../hooks/useFirestore";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { Icon } from "../../components/Icon/Icon";
 
 const ProjectSummary = ({ project }) => {
 	const { deleteDocument, res } = useFirestore("projects");
@@ -14,10 +15,27 @@ const ProjectSummary = ({ project }) => {
 		navigate("/");
 	};
 
+	const markAsdComplete = () => {
+		alert("Project has been marked as complete");
+		navigate("/");
+	};
+
 	return (
 		<div>
 			<div className="project-summary">
-				<h1 className="page-title">{project.name}</h1>
+				<div className="project-header">
+					<h1 className="page-title">{project.name}</h1>
+					<div className="comment-delete-icon">
+						{/* <span
+							className="material-symbols-outlined"
+							onClick={deleteProject}
+						>
+							delete
+						</span> */}
+						<Icon attr="delete" clickEvent={deleteProject} />
+					</div>
+				</div>
+
 				<p className="due-date">
 					Project deadline: {project.deadline.toDate().toDateString()}
 				</p>
@@ -34,7 +52,7 @@ const ProjectSummary = ({ project }) => {
 				</div>
 			</div>
 			{user.uid === project.createdBy.id && (
-				<button className="btn" onClick={deleteProject}>
+				<button className="btn" onClick={markAsdComplete}>
 					Mark as Complete
 				</button>
 			)}

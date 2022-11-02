@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useLogout } from "../../hooks/useLogout";
+import { Icon } from "../Icon/Icon";
 import "./Navbar.css";
 
 const Navbar = ({ user }) => {
@@ -29,9 +30,7 @@ const Navbar = ({ user }) => {
 						) : (
 							<button className="btn logout-btn" onClick={logout}>
 								<span>Logout</span>
-								<span class="material-symbols-outlined">
-									logout
-								</span>
+								<Icon attr="logout" />
 							</button>
 						)}
 					</li>

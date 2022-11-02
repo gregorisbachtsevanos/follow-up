@@ -54,7 +54,7 @@ export const ProjectComments = ({ project }) => {
 									user.uid === project.createdBy.id) && (
 									<div className="comment-delete-icon">
 										<span
-											class="material-symbols-outlined"
+											className="material-symbols-outlined"
 											onClick={(e) =>
 												deleteComment(comment.id, e)
 											}

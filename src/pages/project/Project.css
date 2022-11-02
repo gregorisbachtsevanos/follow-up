@@ -38,6 +38,11 @@
 .project-summary + .btn {
   margin-top: 20px;
 }
+.project-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 /* project comments */
 .project-comments label {
