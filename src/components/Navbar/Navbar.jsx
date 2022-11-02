@@ -27,8 +27,11 @@ const Navbar = ({ user }) => {
 								Logging out...
 							</button>
 						) : (
-							<button className="btn" onClick={logout}>
-								Logout
+							<button className="btn logout-btn" onClick={logout}>
+								<span>Logout</span>
+								<span class="material-symbols-outlined">
+									logout
+								</span>
 							</button>
 						)}
 					</li>

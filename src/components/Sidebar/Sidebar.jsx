@@ -18,11 +18,17 @@ const Sidebar = () => {
 					<ul>
 						<li>
 							<NavLink end to="/">
+								<span class="material-symbols-outlined">
+									space_dashboard
+								</span>
 								<span>Dashboard</span>
 							</NavLink>
 						</li>
 						<li>
 							<NavLink to="/create">
+								<span class="material-symbols-outlined">
+									add
+								</span>
 								<span>New Project</span>
 							</NavLink>
 						</li>
