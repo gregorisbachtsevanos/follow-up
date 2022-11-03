@@ -1,18 +1,16 @@
-import { useState } from "react";
-
 const filterList = [
-	"all",
-	"mine",
-	"development",
-	"design",
-	"marketing",
-	"sales",
+	"All",
+	"Mine",
+	"Development",
+	"Design",
+	"Marketing",
+	"Sales",
 ];
 
-const ProjectFilter = ({ currentFilter, changeFilter }) => {
+const ProjectFilter = ({ filter, changeFilter }) => {
 	// const handleClick = (newFilter) => {
 	// 	console.log(newFilter);
-	// 	setCurrentFilter(newFilter);
+	// 	setfilter(newFilter);
 	// };
 
 	return (
@@ -21,9 +19,9 @@ const ProjectFilter = ({ currentFilter, changeFilter }) => {
 				<p>Filter by:</p>
 				{filterList.map((f) => (
 					<button
-						key={f}
-						onClick={() => changeFilter(f)}
-						className={currentFilter === f ? "active" : ""}
+						key={f.toLowerCase()}
+						onClick={() => changeFilter(f.toLowerCase())}
+						className={filter === f ? "active" : ""}
 					>
 						{f}
 					</button>

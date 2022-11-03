@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import { Avatar } from '../Avatar/Avatar';
-import './ProjectList.css';
+import { Link } from "react-router-dom";
+import { Avatar } from "../Avatar/Avatar";
+import "./ProjectList.css";
 
-const ProjectList = ({ projects }) => {
+const ProjectList = ({ projects, filter }) => {
 	return (
 		<div className="project-list">
 			{projects.length === 0 && <p>No project yet!</p>}
