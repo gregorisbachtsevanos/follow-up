@@ -32,7 +32,9 @@ const ProjectSummary = ({ project }) => {
 						>
 							delete
 						</span> */}
-						<Icon attr="delete" clickEvent={deleteProject} />
+						{user.uid === project.createdBy.id && (
+							<Icon attr="delete" clickEvent={deleteProject} />
+						)}
 					</div>
 				</div>
 
