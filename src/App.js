@@ -13,6 +13,7 @@ import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar';
 import { useAuthContext } from './hooks/useAuthContext'
 import OnlineUsers from './components/OnlineUsers/OnlineUsers';
+import Settings from './pages/settings/Settings';
 
 function App() {
 	const { authIsReady, user } = useAuthContext()
@@ -27,6 +28,7 @@ function App() {
 							<Route path='/' element={<Dashboard />} />
 							<Route path='/create' element={<Create />} />
 							<Route path='/project/:id' element={<Project />} />
+							<Route path='/settings' element={<Settings />} />
 						</Route>
 						<Route element={<PublicRouter user={user} />}>
 							<Route path='/login' element={<Login />} />

@@ -32,6 +32,15 @@ const Sidebar = () => {
 								<span>New Project</span>
 							</NavLink>
 						</li>
+						<li>
+							<NavLink to="/settings">
+								{/* <span settings="material-symbols-outlined">
+									add
+								</span> */}
+								<Icon attr="settings" />
+								<span>Settings</span>
+							</NavLink>
+						</li>
 					</ul>
 				</nav>
 			</div>
