@@ -1,18 +1,18 @@
-import { useState } from "react";
-import ProjectList from "../../components/ProjectList/ProjectList";
-import { useCollection } from "../../hooks/useCollection";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useState } from 'react';
+import ProjectList from '../../components/ProjectList/ProjectList';
+import { useCollection } from '../../hooks/useCollection';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
-import "./Dashboard.css";
-import ProjectFilter from "./ProjectFilter";
+import './Dashboard.css';
+import ProjectFilter from './ProjectFilter';
 
 const Dashboard = () => {
 	const { user } = useAuthContext();
-	const [filter, setFilter] = useState("all");
+	const [filter, setFilter] = useState('all');
 
-	const { documents, error } = useCollection("projects", [
-		"createdAt",
-		"desc",
+	const { documents, error } = useCollection('projects', [
+		'createdAt',
+		'desc',
 	]);
 
 	const changeFilter = (newFilter) => {
@@ -23,9 +23,9 @@ const Dashboard = () => {
 	const projects = documents
 		? documents.filter((document) => {
 				switch (filter) {
-					case "all":
+					case 'all':
 						return true;
-					case "mine":
+					case 'mine':
 						let assignedToMe = false;
 						document.assignedUsersList.map((u) => {
 							if (u.id === user.uid) {
@@ -33,12 +33,12 @@ const Dashboard = () => {
 							}
 						});
 						return assignedToMe;
-					case "all":
+					case 'all':
 						return true;
-					case "development":
-					case "design":
-					case "marketing":
-					case "sales":
+					case 'development':
+					case 'design':
+					case 'marketing':
+					case 'sales':
 						return document.category === filter;
 					default:
 						return true;

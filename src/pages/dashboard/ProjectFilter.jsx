@@ -1,29 +1,24 @@
 const filterList = [
-	"All",
-	"Mine",
-	"Development",
-	"Design",
-	"Marketing",
-	"Sales",
+	'all',
+	'mine',
+	'development',
+	'design',
+	'marketing',
+	'sales',
 ];
 
 const ProjectFilter = ({ filter, changeFilter }) => {
-	// const handleClick = (newFilter) => {
-	// 	console.log(newFilter);
-	// 	setfilter(newFilter);
-	// };
-
 	return (
 		<div className="project-filter">
 			<nav>
 				<p>Filter by:</p>
 				{filterList.map((f) => (
 					<button
-						key={f.toLowerCase()}
-						onClick={() => changeFilter(f.toLowerCase())}
-						className={filter === f ? "active" : ""}
+						key={f}
+						onClick={() => changeFilter(f)}
+						className={filter === f && 'active'}
 					>
-						{f}
+						{f.charAt(0).toUpperCase()+f.slice(1)}
 					</button>
 				))}
 			</nav>
