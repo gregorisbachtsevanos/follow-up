@@ -4,21 +4,50 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import './Settings.css';
 
 const Settings = () => {
-	const [email, setEmail] = useState(false); // set new email
-	const [password, setPassword] = useState(false); // set new password
-	const [firstName, setFirstName] = useState(false); // set firstName
-	const [lastName, setLastName] = useState(false); // set lastName
-	const [username, setUsername] = useState(false); // set new username
+	const { user } = useAuthContext(); // get user
+
+	const [email, setEmail] = useState(user.email ? user.email : false); // set new email
+	const [password, setPassword] = useState(
+		user.password ? user.password : false
+	); // set new password
+
+	const [firstName, setFirstName] = useState(
+		user.firstName ? user.firstName : false
+	); // set firstName
+
+	const [lastName, setLastName] = useState(
+		user.lastName ? user.lastName : false
+	); // set lastName
+
+	const [username, setUsername] = useState(
+		user.displayName ? user.displayName : false
+	); // set new username
+
 	const [avatar, setAvatar] = useState(null); // set new avatar
 	const [avatarError, setAvatarError] = useState(null); // set error for avatar input
 
-	const { user } = useAuthContext(); // get user
 	const { updateDocument } = useFirestore('users'); // edit collection
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		
-		updateDocument(user.uid, {firstName, lastName, username, email, password})
+
+		var info = [
+			email && { email },
+			username && { displayName: username },
+			firstName && { firstName: firstName },
+			lastName && { lastName },
+		];
+		let newInfo = info.filter((i) => i != false);
+
+		console.log(user.uid, newInfo);
+		return;
+		updateDocument(user.uid, {
+			email,
+			password,
+			username,
+			firstName,
+			lastName,
+		});
 	};
 
 	const changeValues = (defaultValues, newValues) => {
@@ -34,7 +63,7 @@ const Settings = () => {
 				<input
 					type="text"
 					onChange={(e) => setFirstName(e.target.value)}
-					value={user.firstName}
+					placeholder={firstName ? firstName : void 0}
 				/>
 			</label>
 			<label>
@@ -42,15 +71,7 @@ const Settings = () => {
 				<input
 					type="text"
 					onChange={(e) => setLastName(e.target.value)}
-					value={user.lastName}
-				/>
-			</label>
-			<label>
-				<span>Email</span>
-				<input
-					type="email"
-					onChange={(e) => setEmail(e.target.value)}
-					value={user.email}
+					placeholder={lastName ? lastName : void 0}
 				/>
 			</label>
 			<label>
@@ -58,7 +79,15 @@ const Settings = () => {
 				<input
 					type="text"
 					onChange={(e) => setUsername(e.target.value)}
-					value={user.displayName}
+					placeholder={username ? username : void 0}
+				/>
+			</label>
+			{/* <label>
+				<span>Email</span>
+				<input
+					type="email"
+					onChange={(e) => setEmail(e.target.value)}
+					placeholder={user.email}
 				/>
 			</label>
 			<label>
@@ -67,15 +96,15 @@ const Settings = () => {
 					type="password"
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-			</label>
-			<label>
+			</label> */}
+			{/* <label>
 				<span>Avatar</span>
 				<input
 					type="file"
 					// onChange={handleAvatarChange}
 					// value={avatar}
 				/>
-			</label>
+			</label> */}
 			{/* {avatarError && <div className="error">{avatarError}</div>}
 			{isPending ? (
 				<button className="btn" disabled>
