@@ -13,7 +13,8 @@ label div input:focus{
 }
 label div button{
    background-color: transparent;
+   color: var(--primary-color);
+   cursor: pointer;
    border: none;
    padding: 1%;
-   cursor: pointer;
 }

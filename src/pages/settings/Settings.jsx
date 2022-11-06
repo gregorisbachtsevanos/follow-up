@@ -6,57 +6,26 @@ import './Settings.css';
 const Settings = () => {
 	const { user } = useAuthContext(); // get user
 
-	const [email, setEmail] = useState(user.email ? user.email : false); // set new email
-	const [password, setPassword] = useState(
-		user.password ? user.password : false
-	); // set new password
+	const [email, setEmail] = useState(''); // set new email
+	const [password, setPassword] = useState(''); // set new password
 
-	const [firstName, setFirstName] = useState(
-		user.firstName ? user.firstName : false
-	); // set firstName
+	const [firstName, setFirstName] = useState(''); // set firstName
 
-	const [lastName, setLastName] = useState(
-		user.lastName ? user.lastName : false
-	); // set lastName
+	const [lastName, setLastName] = useState(''); // set lastName
 
-	const [username, setUsername] = useState(
-		user.displayName ? user.displayName : false
-	); // set new username
+	const [username, setUsername] = useState(''); // set new username
 
 	const [avatar, setAvatar] = useState(null); // set new avatar
 	const [avatarError, setAvatarError] = useState(null); // set error for avatar input
 
 	const { updateDocument } = useFirestore('users'); // edit collection
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
-		var info = [
-			email && { email },
-			username && { displayName: username },
-			firstName && { firstName: firstName },
-			lastName && { lastName },
-		];
-		let newInfo = info.filter((i) => i != false);
-
-		updateDocument(user.uid, newInfo);
-		return;
-		updateDocument(user.uid, {
-			email,
-			password,
-			username,
-			firstName,
-			lastName,
-		});
+	const handleClick = (value) => {
+		updateDocument(user.uid, value);
 	};
-
-	const changeValues = (defaultValues, newValues) => {
-		defaultValues = { ...defaultValues, newValues };
-		console.log(defaultValues);
-	};
-
+	console.log(user);
 	return (
-		<form className="update-form" onSubmit={handleSubmit}>
+		<form className="update-form">
 			<h2>Update Profile</h2>
 			<label>
 				<span>First Name</span>
@@ -64,9 +33,11 @@ const Settings = () => {
 					<input
 						type="text"
 						onChange={(e) => setFirstName(e.target.value)}
-						placeholder={firstName ? firstName : void 0}
+						placeholder={user.providerData[0].firstName}
 					/>
-					<button>change</button>
+					<button onClick={(e) => handleClick({ firstName })}>
+						change
+					</button>
 				</div>
 			</label>
 			<label>
@@ -75,9 +46,11 @@ const Settings = () => {
 					<input
 						type="text"
 						onChange={(e) => setLastName(e.target.value)}
-						placeholder={lastName ? lastName : void 0}
+						placeholder={user.providerData[0].lastLame}
 					/>
-					<button>change</button>
+					<button onClick={(e) => handleClick({ lastName })}>
+						change
+					</button>
 				</div>
 			</label>
 			<label>
@@ -86,10 +59,11 @@ const Settings = () => {
 					<input
 						type="text"
 						onChange={(e) => setUsername(e.target.value)}
-						placeholder={username ? username : void 0}
+						placeholder={user.displayName}
 					/>
-					<button>change</button>
-					
+					<button onClick={(e) => handleClick({ displayName: username })}>
+						change
+					</button>
 				</div>
 			</label>
 			{/* <label>
@@ -121,7 +95,6 @@ const Settings = () => {
 					Loading
 				</button>
 			) : ( */}
-			<button className="btn">Update</button>
 			{/* )}
 			{error && <div className="error">{error}</div>} */}
 		</form>
