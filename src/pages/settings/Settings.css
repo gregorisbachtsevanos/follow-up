@@ -1,1 +1,19 @@
-
+label div{
+   display: flex;
+   align-items: center;
+   border: 1px solid rgba(0, 0, 0, 0.23);
+   border-radius: 4px;
+   background-color: white;
+}
+label div input{
+   border: none;
+}
+label div input:focus{
+   outline: none;
+}
+label div button{
+   background-color: transparent;
+   border: none;
+   padding: 1%;
+   cursor: pointer;
+}

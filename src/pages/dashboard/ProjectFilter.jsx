@@ -16,7 +16,7 @@ const ProjectFilter = ({ filter, changeFilter }) => {
 					<button
 						key={f}
 						onClick={() => changeFilter(f)}
-						className={filter === f && 'active'}
+						className={filter === f ? 'active' : void(0)}
 					>
 						{f.charAt(0).toUpperCase()+f.slice(1)}
 					</button>

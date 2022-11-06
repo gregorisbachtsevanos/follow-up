@@ -39,7 +39,7 @@ const Settings = () => {
 		];
 		let newInfo = info.filter((i) => i != false);
 
-		console.log(user.uid, newInfo);
+		updateDocument(user.uid, newInfo);
 		return;
 		updateDocument(user.uid, {
 			email,
@@ -60,27 +60,37 @@ const Settings = () => {
 			<h2>Update Profile</h2>
 			<label>
 				<span>First Name</span>
-				<input
-					type="text"
-					onChange={(e) => setFirstName(e.target.value)}
-					placeholder={firstName ? firstName : void 0}
-				/>
+				<div>
+					<input
+						type="text"
+						onChange={(e) => setFirstName(e.target.value)}
+						placeholder={firstName ? firstName : void 0}
+					/>
+					<button>change</button>
+				</div>
 			</label>
 			<label>
 				<span>Last Name</span>
-				<input
-					type="text"
-					onChange={(e) => setLastName(e.target.value)}
-					placeholder={lastName ? lastName : void 0}
-				/>
+				<div>
+					<input
+						type="text"
+						onChange={(e) => setLastName(e.target.value)}
+						placeholder={lastName ? lastName : void 0}
+					/>
+					<button>change</button>
+				</div>
 			</label>
 			<label>
 				<span>Username</span>
-				<input
-					type="text"
-					onChange={(e) => setUsername(e.target.value)}
-					placeholder={username ? username : void 0}
-				/>
+				<div>
+					<input
+						type="text"
+						onChange={(e) => setUsername(e.target.value)}
+						placeholder={username ? username : void 0}
+					/>
+					<button>change</button>
+					
+				</div>
 			</label>
 			{/* <label>
 				<span>Email</span>
