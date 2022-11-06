@@ -8,13 +8,9 @@ const Settings = () => {
 
 	const [email, setEmail] = useState(''); // set new email
 	const [password, setPassword] = useState(''); // set new password
-
 	const [firstName, setFirstName] = useState(''); // set firstName
-
 	const [lastName, setLastName] = useState(''); // set lastName
-
 	const [username, setUsername] = useState(''); // set new username
-
 	const [avatar, setAvatar] = useState(null); // set new avatar
 	const [avatarError, setAvatarError] = useState(null); // set error for avatar input
 
