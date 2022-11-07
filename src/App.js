@@ -16,14 +16,15 @@ import OnlineUsers from './components/OnlineUsers/OnlineUsers';
 import Settings from './pages/settings/Settings';
 
 function App() {
-	const { authIsReady, user } = useAuthContext();
+	const { authIsReady, user, theme } = useAuthContext();
+	console.log(theme)
 	return (
-		<div className={'App '+ 'theme'}>
+		<div className={'App '+ theme}>
 			{authIsReady && (
 				<BrowserRouter>
 					{user && <Sidebar />}
 					<div className="container">
-						<Navbar user={user} theme={'theme'} />
+						<Navbar user={user} theme={theme} />
 						<Routes>
 							<Route element={<PrivateRouter user={user} />}>
 								<Route path="/" element={<Dashboard />} />

@@ -1,5 +1,13 @@
+.dark {
+  --bg-color: #3b3434;
+  --heading-color: rgb(199, 199, 199);
+  --text-color: #999;
+  --primary-color: #8d69f1;
+  --highlight-color: #d13267;
+}
 .App {
   display: flex;
+  background: var(--bg-color);
 }
 .App .container{
   flex-grow: 1;

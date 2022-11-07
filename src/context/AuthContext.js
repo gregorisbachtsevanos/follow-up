@@ -31,6 +31,11 @@ export const AuthContextProvider = ({ children }) => {
 		theme: 'dark',
 	});
 
+	const changeTheme = (color) => {
+		console.log(color)
+		dispatch({ type: 'THEME_CHANGE', payload: color });
+	}
+
 	useEffect(() => {
 		const unsub = projectAuth.onAuthStateChanged((user) => {
 			dispatch({ type: 'AUTH_IS_READY', payload: user });
@@ -39,7 +44,7 @@ export const AuthContextProvider = ({ children }) => {
 	}, []);
 
 	return (
-		<AuthContext.Provider value={{ ...state, dispatch }}>
+		<AuthContext.Provider value={{ ...state, dispatch, changeTheme }}>
 			{children}
 		</AuthContext.Provider>
 	);
