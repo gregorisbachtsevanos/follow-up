@@ -12,20 +12,18 @@ import { PublicRouter } from './utils/PublicRouter';
 import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar';
 import { useAuthContext } from './hooks/useAuthContext';
-import { useThemeContext } from './hooks/useThemeContext';
 import OnlineUsers from './components/OnlineUsers/OnlineUsers';
 import Settings from './pages/settings/Settings';
 
 function App() {
 	const { authIsReady, user } = useAuthContext();
-	const { theme } = useThemeContext();
 	return (
-		<div className={'App '+ theme}>
+		<div className={'App '+ 'theme'}>
 			{authIsReady && (
 				<BrowserRouter>
 					{user && <Sidebar />}
 					<div className="container">
-						<Navbar user={user} theme={theme} />
+						<Navbar user={user} theme={'theme'} />
 						<Routes>
 							<Route element={<PrivateRouter user={user} />}>
 								<Route path="/" element={<Dashboard />} />

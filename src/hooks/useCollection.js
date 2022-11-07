@@ -17,10 +17,6 @@ export const useCollection = (collection, _orderBy = null, _query = null) => {
         if (orderBy) ref = ref.orderBy(...orderBy)
 
         const unsub = ref.onSnapshot(snapshot => {
-            // if (snapshot.empty) {
-            //     setError('No Users have ')
-            //     setIsPending(false)
-            // } else {
             let result = []
             snapshot.docs.forEach((doc) => {
                 result.push({ id: doc.id, ...doc.data() })
