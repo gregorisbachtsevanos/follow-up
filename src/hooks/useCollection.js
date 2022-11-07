@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { projectFirestore } from "../firebase/config";
 
-export const useCollection = (collection, _orderBy,) => {
+export const useCollection = (collection, _orderBy = null, _query = null) => {
     const [isPending, setIsPending] = useState(false)
     const [error, setError] = useState(null);
     const [documents, setDocuments] = useState([]);
+
+    console.log(collection, _orderBy, _query)
 
     const orderBy = useRef(_orderBy).current
 

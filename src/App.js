@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 
@@ -9,36 +9,40 @@ import Create from './pages/create/Create';
 import Project from './pages/project/Project';
 import { PrivateRouter } from './utils/PrivateRouter';
 import { PublicRouter } from './utils/PublicRouter';
-import Navbar from './components/Navbar/Navbar'
+import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar';
-import { useAuthContext } from './hooks/useAuthContext'
+import { useAuthContext } from './hooks/useAuthContext';
+import { useThemeContext } from './hooks/useThemeContext';
 import OnlineUsers from './components/OnlineUsers/OnlineUsers';
 import Settings from './pages/settings/Settings';
 
 function App() {
-	const { authIsReady, user } = useAuthContext()
+	const { authIsReady, user } = useAuthContext();
+	const { theme } = useThemeContext();
 	return (
-		<div className="App">
-			{authIsReady && <BrowserRouter>
-				{user && <Sidebar />}
-				<div className="container">
-					<Navbar user={user} />
-					<Routes>
-						<Route element={<PrivateRouter user={user} />}>
-							<Route path='/' element={<Dashboard />} />
-							<Route path='/create' element={<Create />} />
-							<Route path='/project/:id' element={<Project />} />
-							<Route path='/settings' element={<Settings />} />
-						</Route>
-						<Route element={<PublicRouter user={user} />}>
-							<Route path='/login' element={<Login />} />
-							<Route path='/signup' element={<Signup />} />
-						</Route>
-					</Routes>
-				</div>
-				{user && <OnlineUsers />}
-			</BrowserRouter>}
-		</div >
+		<div className={'App '+ theme}>
+			{authIsReady && (
+				<BrowserRouter>
+					{user && <Sidebar />}
+					<div className="container">
+						<Navbar user={user} theme={theme} />
+						<Routes>
+							<Route element={<PrivateRouter user={user} />}>
+								<Route path="/" element={<Dashboard />} />
+								<Route path="/create" element={<Create />} />
+								<Route path="/project/:id" element={<Project />} />
+								<Route path="/settings" element={<Settings />} />
+							</Route>
+							<Route element={<PublicRouter user={user} />}>
+								<Route path="/login" element={<Login />} />
+								<Route path="/signup" element={<Signup />} />
+							</Route>
+						</Routes>
+					</div>
+					{user && <OnlineUsers />}
+				</BrowserRouter>
+			)}
+		</div>
 	);
 }
 
