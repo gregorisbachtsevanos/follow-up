@@ -16,7 +16,8 @@ const Settings = () => {
 
 	const { updateDocument } = useFirestore('users'); // edit collection
 
-	const handleClick = (value) => {
+	const handleClick = (e, value) => {
+		e.preventDefault();
 		updateDocument(user.uid, value);
 	};
 	console.log(user);
@@ -31,7 +32,7 @@ const Settings = () => {
 						onChange={(e) => setFirstName(e.target.value)}
 						placeholder={user.providerData[0].firstName}
 					/>
-					<button onClick={(e) => handleClick({ firstName })}>
+					<button onClick={(e) => handleClick(e, { firstName })}>
 						change
 					</button>
 				</div>
@@ -44,7 +45,7 @@ const Settings = () => {
 						onChange={(e) => setLastName(e.target.value)}
 						placeholder={user.providerData[0].lastLame}
 					/>
-					<button onClick={(e) => handleClick({ lastName })}>
+					<button onClick={(e) => handleClick(e, { lastName })}>
 						change
 					</button>
 				</div>
@@ -57,7 +58,7 @@ const Settings = () => {
 						onChange={(e) => setUsername(e.target.value)}
 						placeholder={user.displayName}
 					/>
-					<button onClick={(e) => handleClick({ displayName: username })}>
+					<button onClick={(e) => handleClick(e, { displayName: username })}>
 						change
 					</button>
 				</div>
