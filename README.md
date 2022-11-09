@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-# Follow Up is a Project Manager Web Application
+## Follow Up is a Project Manager Web Application
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
