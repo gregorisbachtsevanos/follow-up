@@ -4,19 +4,21 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { useFirestore } from '../../hooks/useFirestore';
 
 import { useLogout } from '../../hooks/useLogout';
+import { useTheme } from '../../hooks/useTheme';
 import { Icon } from '../Icon/Icon';
 import './Navbar.css';
 
 const Navbar = ({ user, theme }) => {
 	const { logout, isPending } = useLogout();
-	const { changeTheme } = useAuthContext();
+	// const { changeTheme } = useAuthContext();
 	const [colorTheme, setColorTheme] = useState(theme);
 	const { updateDocument } = useFirestore('users');
+	const {changeTheme} = useTheme()
 
 	const clickHandler = () => {
 		changeTheme(theme === 'light' ? 'dark' : 'light');
 		setColorTheme(theme === 'light' ? 'dark' : 'light');
-		updateDocument(user.uid,{theme})
+		// changeTheme({theme})
 	};
 	return (
 		<div className="navbar">

@@ -28,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(AuthReducer, {
 		user: null,
 		authIsReady: false,
-		theme: 'dark',
+		theme: null,
 	});
 
 	const changeTheme = (color) => {

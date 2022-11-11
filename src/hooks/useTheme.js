@@ -4,11 +4,13 @@ import { useAuthContext } from "./useAuthContext";
 
 export const useTheme = () => {
     const [error, setError] = useState(false)
-    const {dispatch} = useAuthContext();
+    const {dispatch,user} = useAuthContext();
 
-    const changeTheme = (theme) => {
+    const changeTheme = async (theme) => {
         try {
+            await projectFirestore.collection('users').doc(user.uid).update({theme})
             dispatch({type:'THEME_CHANGE', payload:theme})
+
         } catch (error) {
             setError(error.message);
             console.log(error.message);
