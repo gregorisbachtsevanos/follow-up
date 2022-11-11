@@ -17,7 +17,7 @@ import Settings from './pages/settings/Settings';
 
 function App() {
 	const { authIsReady, user, theme } = useAuthContext();
-	console.log(theme)
+	// console.log(theme)	
 	return (
 		<div className={'App '+ theme}>
 			{authIsReady && (

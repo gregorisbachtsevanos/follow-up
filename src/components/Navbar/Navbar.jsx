@@ -16,7 +16,7 @@ const Navbar = ({ user, theme }) => {
 	const clickHandler = () => {
 		changeTheme(theme === 'light' ? 'dark' : 'light');
 		setColorTheme(theme === 'light' ? 'dark' : 'light');
-		updateDocument({theme})
+		updateDocument(user.uid,{theme})
 	};
 	return (
 		<div className="navbar">

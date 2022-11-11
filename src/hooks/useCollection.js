@@ -6,7 +6,7 @@ export const useCollection = (collection, _orderBy = null, _query = null) => {
     const [error, setError] = useState(null);
     const [documents, setDocuments] = useState([]);
 
-    console.log(collection, _orderBy, _query)
+    // console.log(collection, _orderBy, _query)
 
     const orderBy = useRef(_orderBy).current
 

@@ -4,6 +4,7 @@ import "./OnlineUsers.css";
 
 const OnlineUsers = () => {
 	const { documents, error } = useCollection("users");
+	// console.log(documents) //! user.firstname
 	return (
 		<div className="user-list">
 			<h2>All users</h2>

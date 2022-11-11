@@ -70,7 +70,7 @@ export const useFirestore = (collection) => {
 	const updateDocument = async (id, updates) => {
 		dispatch({ type: 'IS_PENDING' });
 		const newInfo = updates
-	// 	return console.log(updates)
+		// return console.log({...updates})
 
 	// 	if(collection === 'users'){
 	// 		console.log(collection)
@@ -78,7 +78,7 @@ export const useFirestore = (collection) => {
 	// 		console.log('comments')
 	// 	}
 	// return
-		const updatedDocument = await ref.doc(id).update({...updates});
+		const updatedDocument = await ref.doc(id).update({...updates, updates});
 		try {
 			dispatch({ type: 'UPDATE_DOCUMENT', payload: updatedDocument });
 		} catch (error) {
