@@ -6,14 +6,16 @@ export const useCollection = (collection, _orderBy = null, _query = null) => {
     const [error, setError] = useState(null);
     const [documents, setDocuments] = useState([]);
 
-    // console.log(collection, _orderBy, _query)
 
     const orderBy = useRef(_orderBy).current
+    const query = useRef(_query).current
 
     useEffect(() => {
 
         setIsPending(true)
         let ref = projectFirestore.collection(collection)
+
+        if (query) ref = ref.where(...query)
         if (orderBy) ref = ref.orderBy(...orderBy)
 
         const unsub = ref.onSnapshot(snapshot => {

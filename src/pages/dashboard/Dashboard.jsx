@@ -16,7 +16,7 @@ const Dashboard = () => {
 	]);
 
 	const changeFilter = (newFilter) => {
-		console.log(newFilter);
+		// console.log(newFilter);
 		setFilter(newFilter);
 	};
 

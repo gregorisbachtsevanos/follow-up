@@ -8,7 +8,9 @@ export const useTheme = () => {
 
     const changeTheme = async (theme) => {
         try {
-            await projectFirestore.collection('users').doc(user.uid).update({theme})
+            console.log('THEME:' ,theme)
+            // return console.log(user.uid)
+            await projectFirestore.collection('users').doc(user.uid).update({theme: theme})
             dispatch({type:'THEME_CHANGE', payload:theme})
 
         } catch (error) {
@@ -16,7 +18,6 @@ export const useTheme = () => {
             console.log(error.message);
         }
     }
-
 
   return {changeTheme}
 }

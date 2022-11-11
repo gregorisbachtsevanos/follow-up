@@ -1,23 +1,29 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import './App.css';
+import { useDocument } from './hooks/useDocument';
+import { useAuthContext } from './hooks/useAuthContext';
+
+import Navbar from './components/Navbar/Navbar';
+import Sidebar from './components/Sidebar/Sidebar';
+import OnlineUsers from './components/OnlineUsers/OnlineUsers';
 
 import Dashboard from './pages/dashboard/Dashboard';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Create from './pages/create/Create';
 import Project from './pages/project/Project';
+import Settings from './pages/settings/Settings';
+
 import { PrivateRouter } from './utils/PrivateRouter';
 import { PublicRouter } from './utils/PublicRouter';
-import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar/Sidebar';
-import { useAuthContext } from './hooks/useAuthContext';
-import OnlineUsers from './components/OnlineUsers/OnlineUsers';
-import Settings from './pages/settings/Settings';
+
+import './App.css';
 
 function App() {
 	const { authIsReady, user, theme } = useAuthContext();
-	// console.log(theme)	
+	const { documents } = useDocument('users')
+
+	console.log(documents)	
 	return (
 		<div className={'App '+ theme}>
 			{authIsReady && (

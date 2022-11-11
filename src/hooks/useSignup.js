@@ -24,6 +24,7 @@ export const useSignup = () => {
             // create user's document
             await projectFirestore.collection('users').doc(res.user.uid).set({
                 online: true,
+                theme: 'light',
                 displayName,
                 photoURL: imgUrl
             })

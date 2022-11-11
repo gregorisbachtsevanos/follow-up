@@ -12,7 +12,7 @@ export const useLogin = () => {
 
         try {
             const res = await projectAuth.signInWithEmailAndPassword(email, password)
-            await projectFirestore.collection('users').doc(res.user.uid).update({ online: true })
+            await projectFirestore.collection('users').doc(res.user.uid).update({ online: true, theme: 'light' })
             dispatch({ type: 'LOGIN', payload: res.user })
         } catch (error) {
             setIsPending(false)

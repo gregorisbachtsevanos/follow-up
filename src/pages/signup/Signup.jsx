@@ -71,6 +71,7 @@ const Signup = () => {
 			<label>
 				<span>Avatar</span>
 				<input
+
 					type="file"
 					onChange={handleAvatarChange}
 					// value={avatar}
