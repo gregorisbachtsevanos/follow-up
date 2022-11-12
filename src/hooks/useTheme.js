@@ -3,8 +3,8 @@ import { projectAuth, projectFirestore } from "../firebase/config";
 import { useAuthContext } from "./useAuthContext";
 
 export const useTheme = () => {
-    const [error, setError] = useState(false)
-    const {dispatch,user} = useAuthContext();
+    const [ error, setError ] = useState(false)
+    const { dispatch,user } = useAuthContext();
 
     const changeTheme = async (theme) => {
         try {
