@@ -25,9 +25,9 @@ const Navbar = ({ user, theme }) => {
 			<ul>
 				<li className="logo">
 					<span>LOGO</span>
-					<button onClick={clickHandler}>
+					{/* <button onClick={clickHandler}>
 						{colorTheme === 'light' ? 'dark' : 'light'}
-					</button>
+					</button> */}
 				</li>
 				{!user ? (
 					<>
