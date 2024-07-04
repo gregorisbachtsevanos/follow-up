@@ -1,20 +1,20 @@
 # Follow-Up
 Follow-Up is a powerful and intuitive task manager application built with React and Firebase. It helps you stay organized and on top of your tasks with ease.
 
-Table of Contents
-Features
-Installation
-Usage
-Project Structure
-Contributing
-License
-Features
-User Authentication with Firebase
-Create, read, update, and delete tasks
-Set due dates and priorities for tasks
-Organize tasks with categories/labels
-Mark tasks as completed
-Responsive design
+Table of Contents\
+Features\
+Installation\
+Usage\
+Project Structure\
+Contributing\
+License\
+Features\
+User Authentication with Firebase\
+Create, read, update, and delete tasks\
+Set due dates and priorities for tasks\
+Organize tasks with categories/labels\
+Mark tasks as completed\
+Responsive design\
 Installation
 To get started with Follow-Up, follow these steps:
 
